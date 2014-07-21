@@ -26,16 +26,18 @@ def is_prime(n, prime_nums_list):
 def gen_prime():
     """Return a prime number generator."""
     prime_nums_list = []
-    num = 2
+    yield 2
+    num = 3
     while True:
         if is_prime(num, prime_nums_list):
             prime_nums_list.append(num)
             yield num
-        num = num + 1
+        num = num + 2
 
 if __name__ == "__main__":
+    n = 10001
     primes = gen_prime()
     p = 0
-    for i in range(10001):
+    for i in range(n):
         p = primes.next()
     print p
