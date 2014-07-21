@@ -8,13 +8,16 @@ that the 6^th prime is 13.
 What is the 10001^st prime number?
 """
 
+import math
+
 def is_prime(n, prime_nums_list):
     """Return True if the given number is not divisible
     by any number in the list. Return False otherwise."""
+    root_n = math.sqrt(n)
     for v in prime_nums_list:
-        # If the next prime number is greater than n / 2,
+        # If the next prime number is greater than sqrt(n),
         # it means that n is prime.
-        if v > n / 2:
+        if v > root_n:
             return True
         if n % v == 0:
             return False
