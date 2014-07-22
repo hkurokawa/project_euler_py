@@ -20,15 +20,19 @@ def ceil(a):
 def floor(a):
     return int(math.floor(a))
 
-def _range(a, b):
-    return range(ceil(a), floor(b) + 1)
-
 def list_triplet(n):
-    root_2 = math.sqrt(2)
+    sqrt_2 = math.sqrt(2)
     ls = []
-    for c in _range(n/3.0, n/2.0):
-        for b in range(int(max(c / root_2, ceil((n - c) / 2.0))), c):
-            ls.append((n - c - b, b, c))
+    # As a + b > c and a + b + c = n, c < n/2.
+    # Also, c > n/3 because c > a (c^2 > a^2), c > b (c^2 > b^2) and a + b + c = n
+    for c in range(ceil(n/3.0), floor(n/2.0) + 1):
+        # Here, we can assume a < b.
+        # Hence, b > c / sqrt(2) and b > (n - c) / 2
+        for b in range(int(max(c / sqrt_2, ceil((n - c) / 2.0))), c):
+            a = n - c - b
+            # a < c / sqrt(2) and c < (n - c) / 2
+            if a < c / sqrt_2 and a <= (n - c) / 2:
+                ls.append((a, b, c))
     return ls
 
 if __name__ == "__main__":
